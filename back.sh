@@ -4,15 +4,19 @@ root=`pwd`;
 . $root/dev/hosts.sh;		# Host`s managment
 . $root/dev/restore.sh; 	# All restore functions
 . $root/dev/enchant.sh; 	# Some cool output
-logfile="$root/log.txt";
+logfile="$root/log.txt";	# Path to log file
+mkdir -p $root/storage; 	# Check storage dir
+mkdir -p $root/hosts; 		# Check host dir
 
 case $1 in
-*) less $root/README.md;
+*) echo -e "\tUsage: [help|backup {list|host_name backup_name}|restore {list|backup_name host_name}]";
+;;
+help) less $root/README.md;
 ;;
 log) less $logfile;
 ;;
-backup) backup "$2" "$3" "$4";
+backup) backupC "$2" "$3" "$4";
 ;;
-restore) restore "$2" "$3" "$4";
+restore) restoreC "$2" "$3" "$4";
 ;;
 esac;
