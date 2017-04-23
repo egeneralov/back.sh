@@ -9,14 +9,14 @@ mkdir -p $root/storage; 	# Check storage dir
 mkdir -p $root/hosts; 		# Check host dir
 
 case $1 in
-*) echo -e "\tUsage: [help|backup {list|host_name backup_name}|restore {list|backup_name host_name}]";
+*) info "Usage: [help|backup|restore]"; info "\t backup  [list| do \$host_name \$backup_name]"; info "\trestore  [list| do \$backup_name \$host_name]";
 ;;
 help) less $root/README.md;
 ;;
 log) less $logfile;
 ;;
-backup) backupC "$2" "$3" "$4";
+backup) backupC "$2" "$3" "$4" "$5";
 ;;
-restore) restoreC "$2" "$3" "$4";
+restore) restoreC "$2" "$3" "$4" "$5";
 ;;
 esac;
