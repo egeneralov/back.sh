@@ -4,7 +4,9 @@ backupC () {
 	case $1 in
 	list) ls $root/hosts/;
 	;;
-	*) create_backup "$2" "$3";
+	do) create_backup "$2" "$3";
+	;;
+	*) error "Failed to backup - incorrect command";
 	;;
 	esac;
 }

@@ -6,6 +6,8 @@ restoreC () {
 	;;
 	*) create_restore "$2" "$3";
 	;;
+	*) error "Failed to restore - incorrect command";
+	;;
 	esac;
 }
 
