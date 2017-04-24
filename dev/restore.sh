@@ -39,7 +39,7 @@ create_restore () {
 
 	sure_reboot=`question "Reboot $host_name? [y/N]"`;
 	if [[ $sure_reboot == "y" ]]; then 
-			ssh -o "BatchMode=yes" root@$host_ip 'reboot' > /dev/null 2>&1 && info "Rebooted" || warning "Failed to restored permissions";
+			ssh -o "BatchMode=yes" root@$host_ip 'reboot' > /dev/null 2>&1 && info "Rebooted" || warning "Failed to reboot (or logout not completed)";
 	else
 		if [[ $sure_reboot == "Y" ]]; then 
 			ssh -o "BatchMode=yes" -o "ServerAliveInterval=1" -o "ServerAliveCountMax=1" root@$host_ip 'reboot &' > /dev/null 2>&1 && info "Rebooted" || warning "Failed to reboot";
