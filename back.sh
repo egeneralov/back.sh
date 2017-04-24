@@ -13,7 +13,7 @@ help) less $root/README.md;
 ;;
 log) less $logfile;
 ;;
-host) hostC "$2" "$3";
+host) hostC "$2" "$3" "$4";
 ;;
 backup) backupC "$2" "$3" "$4" "$5";
 ;;
