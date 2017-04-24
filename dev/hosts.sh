@@ -8,7 +8,7 @@ hostC () {
 	;;
 	delete) delete_host "$2";
 	;;
-	*) error "Failed to modify host - incorrect command";
+	*) error "\t host	[list|create \$host_name \$host_ip|delete \$host_name]";
 	;;
 	esac;
 }

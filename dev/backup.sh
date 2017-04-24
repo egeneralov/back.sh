@@ -8,7 +8,7 @@ backupC () {
 	;;
 	delete) delete_backup "$2";
 	;;
-	*) error "Failed to backup - incorrect command";
+	*) error "\t backup  [list|create \$host_name \$backup_name|delete \$backup_name]";
 	;;
 	esac;
 }

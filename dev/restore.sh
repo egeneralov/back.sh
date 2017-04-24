@@ -4,7 +4,7 @@ restoreC () {
 	case $1 in
 	do) create_restore "$2" "$3";
 	;;
-	*) error "Failed to restore - incorrect command";
+	*) error "\t restore  [do \$host_name \$backup_name]";
 	;;
 	esac;
 }
