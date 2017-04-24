@@ -23,6 +23,6 @@ restore) restoreC "$2" "$3" "$4" "$5";
 	info "Usage: [help|host|backup|restore]";
 	info "\t host	[list|create \$host_name \$host_ip|delete \$host_name]";
 	info "\t backup  [list|create \$host_name \$backup_name|delete \$backup_name]";
-	info "\t restore  [list|create \$backup_name \$host_name]";
+	info "\t restore  [do \$host_name \$backup_name]";
 ;;
 esac;

@@ -2,7 +2,7 @@
 
 ## Description
 
-Backup linux remote host easy.
+Backup remote linux host easy.
 
 ## Warning
 
@@ -13,52 +13,43 @@ Backup linux remote host easy.
 
 ## Use
 
-### Log
-
-	back.sh log
-		[20.02.2017 20:30] {backup|restore} {host name} {host ip}
-
 ### Create host
 
-- **mkdir hosts/example_host**
-- **nano hosts/example_host/config.sh**
-- **chmod +x hosts/example_host/config.sh**
+Manual:
 
-**config.sh**
+	back.sh host create
+		[question] Enter host name: example_host
+		[question] Enter host ip: 127.0.0.1
+			# Will open 2 files with nano - before.sh and after.sh
+Auto:
 
-	#!/bin/bash
-	host=123.123.123.123
-	user=root	# recommend use root - sudo will not work
-
-If you need to do something in remote before backup - *like stop database server*
-
-- Create bash script in **hosts/example_host/before.sh**
-- **chmod +x hosts/example_host/before.sh**
-
-If you need to do something in remote after backup - *like start database server*
-
-- Create bash script in **hosts/example_host/after.sh**
-- **chmod +x hosts/example_host/after.sh**
+	back.sh host create example_host 127.0.0.1
 
 **before.sh** or **after.sh**
 
 	#!/bin/bash
 	/etc/init.d/service stop	# use full path
-	pwd=/				# work directory will be /
+	pwd=/				# work directory for script will be /
 
-## Host list
+### Host list
 
 	back.sh host list
 
-## Create backup
+### Create backup
 
-	back.sh backup example_host name_of_backup "note"
+	back.sh backup create example_host name_of_backup
 
-## List of backup`s
+### List of backup`s
 
 	back.sh backup list
-		[date] [name]
 
-## Restore backup
+### Restore backup
 
-	back.sh restore name_of_backup example_host [reboot]
+	back.sh restore do example_host name_of_backup
+
+Will ask 2 questions:
+
+- Save **/etc/network/interfaces**?
+- Reboot host? 		# if you will use DigitalOcean - you got a warn, because logout will not complete, but host **will be** rebooted
+
+	back.sh restore example_host name_of_backup
