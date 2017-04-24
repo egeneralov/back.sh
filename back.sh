@@ -9,14 +9,20 @@ mkdir -p $root/storage; 	# Check storage dir
 mkdir -p $root/hosts; 		# Check host dir
 
 case $1 in
-*) info "Usage: [help|backup|restore]"; info "\t backup  [list| do \$host_name \$backup_name]"; info "\trestore  [list| do \$backup_name \$host_name]";
-;;
 help) less $root/README.md;
 ;;
 log) less $logfile;
 ;;
+host) hostC "$2" "$3";
+;;
 backup) backupC "$2" "$3" "$4" "$5";
 ;;
 restore) restoreC "$2" "$3" "$4" "$5";
+;;
+*) # In default case - we showing mini help
+	info "Usage: [help|host|backup|restore]";
+	info "\t host	[list|create \$host_name \$host_ip|delete \$host_name]";
+	info "\t backup  [list|create \$host_name \$backup_name|delete \$backup_name]";
+	info "\t restore  [list|create \$backup_name \$host_name]";
 ;;
 esac;
