@@ -20,15 +20,15 @@ create_backup () {
 	if [ -z "$backup_name" ]; then error "Specify backup name"; else mkdir -p "$root/storage/$backup_name"; fi; 									# Check name for backup
 	if ping -c 2 $host_ip > /dev/null 2>&1; then info "Server online"; else error "Failed to ping server"; fi; 										# Check network connection to server
 	ssh -q -o "BatchMode=yes" root@$host_ip "echo 2>&1" > /dev/null 2>&1 && info "Test SSH connection successfully" || error "Failed to connect"; 	# Check ssh connection to server 
-	
-	if [ -f "$root/hosts/$host_name/before.sh" ]; then  		# If file before.sh exist - upload and run - else warn user
-		scp "$root/hosts/$host_name/before.sh" root@$host_ip:/before.sh > /dev/null 2>&1 || error "Failed to upload before.sh";
-		ssh -o "BatchMode=yes" root@$host_ip '/before.sh' > /dev/null && info "Runned before.sh successfully" || error "Failed to run before.sh";
-	else warning "Script before.sh not exist"; fi;
 
 	info "Chech rsync and acl remote installation";
 	ssh -o "BatchMode=yes" root@$host_ip '/usr/bin/apt-get install -y rsync acl' > /dev/null && info "Rsync and acl installed" || error "Failed to install rsync or acl"; # Force apt-get install 
 	ssh -o "BatchMode=yes" root@$host_ip 'getfacl -R / > /perms.acl' > /dev/null 2>&1 && info "Permissions backup successfully" || error "Failed to backup permissions";  # Backup permissions
+
+	if [ -f "$root/hosts/$host_name/before.sh" ]; then  		# If file before.sh exist - upload and run - else warn user
+		scp "$root/hosts/$host_name/before.sh" root@$host_ip:/before.sh > /dev/null 2>&1 || error "Failed to upload before.sh";
+		ssh -o "BatchMode=yes" root@$host_ip '/before.sh' > /dev/null && info "Runned before.sh successfully" || error "Failed to run before.sh";
+	else warning "Script before.sh not exist"; fi;
 
 	info "Backup started";		# Rsync must exclude devices and process save to back.sh/storage/name_of_backup
 	rsync -ar -e ssh --delete-after --force --compress --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found"} root@$host_ip:/ "$root/storage/$backup_name/" > /dev/null || error "Failed to backup $host_name";
