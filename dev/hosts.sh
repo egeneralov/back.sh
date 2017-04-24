@@ -46,6 +46,6 @@ delete_host () {
 	if [ -z "$host_name" ]; then error "Specify host name"; fi;
 	if [ ! -d "$root/hosts/$host_name" ]; then error "Host not found"; fi;
 	sure_delete=`question "Delete host $host_name [y/N]"`;
-	if [[ $sure_delete == "y" ]]; then rm -rf "$root/hosts/$backup_name" && info "Host $host_name deleted." || error "Failed to delete $root/hosts/$hosts"; fi;
-	if [[ $sure_delete == "Y" ]]; then rm -rf "$root/hosts/$backup_name" && info "Host $host_name deleted." || error "Failed to delete $root/hosts/$hosts"; fi;
+	if [[ $sure_delete == "y" ]]; then rm -rf "$root/hosts/$host_name" && info "Host $host_name deleted." || error "Failed to delete $root/hosts/$hosts"; fi;
+	if [[ $sure_delete == "Y" ]]; then rm -rf "$root/hosts/$host_name" && info "Host $host_name deleted." || error "Failed to delete $root/hosts/$hosts"; fi;
 }
