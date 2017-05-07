@@ -1,5 +1,9 @@
 # back.sh
 
+# DO NOT USE IN PRODUCTION !!!
+
+See **TODO.md** and **RUN.md** if you thing another.
+
 ## Installation
 
 	wget https://cloud.takepage.ru/back.sh-v0.3-release.tar
